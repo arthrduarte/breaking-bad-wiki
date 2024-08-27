@@ -7,10 +7,10 @@ router.get('/', function (req, res, next) {
     res.json(data);
 });
 
-// Get character by name
-router.get('/:name', (req, res) => {
-    const requestedCharacter = req.params.name
-    const response = data.find(character => character.name === requestedCharacter)
+// Get character by index
+router.get('/:index/:name', (req, res) => {
+    const requestedCharacter = req.params.index
+    const response = data[requestedCharacter]
 
     if (response) {
         res.send(response);
