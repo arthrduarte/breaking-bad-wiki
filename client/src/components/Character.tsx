@@ -1,10 +1,13 @@
 import React from "react";
+import axios from 'axios';
 
-export default function Character(){
+export default function Character() {
 
-    return(
+    // const fetchData
+
+    return (
         <div>
-            
+
         </div>
     )
 }
