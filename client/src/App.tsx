@@ -19,11 +19,20 @@ interface Character {
 
 function App() {
   const [data, setData] = useState<Character[]>([]);
+  const [series, setSeries] = useState<string>("Breaking Bad")
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('http://localhost:9000/characters');
-      setData(response.data);
+      if (series) {
+        if (series == "All") {
+          const response = await axios.get('http://localhost:9000/characters');
+          setData(response.data);
+        }
+        if (series == "Better Call Saul" || series == "Breaking Bad") {
+          const response = await axios.get(`http://localhost:9000/characters/${series}`);
+          setData(response.data);
+        }
+      }
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -31,7 +40,7 @@ function App() {
 
   useEffect(() => {
     fetchData()
-  }, [])
+  }, [series])
 
   return (
     <Router>
@@ -39,6 +48,23 @@ function App() {
         <Route path="/" element={
           <>
             <h1 className="font-bold text-[3rem] text-center">Breaking Bad Wiki</h1>
+            <div className='flex space-x-5'>
+              <p onClick={() => {
+                console.log("Clicked")
+                setSeries("All")
+                fetchData()
+              }}>All</p>
+              <p onClick={() => {
+                console.log("Clicked")
+                setSeries("Breaking Bad")
+                fetchData()
+              }}>Breaking Bad</p>
+              <p onClick={() => {
+                console.log("Clicked")
+                setSeries("Better Call Saul")
+                fetchData()
+              }}>Better Call Saul</p>
+            </div>
             <div className='flex flex-col justify-center items-center lg:flex-row lg:flex-wrap'>
               {data.length > 0 ? (
                 data.map((character, index) => (
