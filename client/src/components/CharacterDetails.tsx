@@ -19,11 +19,11 @@ interface Character {
 
 export default function Character() {
     const [data, setData] = useState<Character>();
-    const { index, name } = useParams<{ index: string; name: string }>();
+    const { series, name } = useParams<{ series: string; name: string }>();
 
     const fetchData = async () => {
         try {
-            const response = await axios.get(`http://localhost:9000/characters/${index}/${name}`);
+            const response = await axios.get(`http://localhost:9000/characters/${series}/${name}`);
             setData(response.data);
         } catch (error) {
             console.error("Error fetching data:", error);

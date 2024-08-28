@@ -8,9 +8,8 @@ router.get('/', function (req, res, next) {
 });
 
 // Get character by index
-router.get('/:index/:name', (req, res) => {
-    const requestedCharacter = req.params.index
-    const response = data[requestedCharacter]
+router.get('/:series/:name', (req, res) => {
+    const response = data.find(character => character.series === req.params.series && character.name === req.params.name)
 
     if (response) {
         res.send(response);

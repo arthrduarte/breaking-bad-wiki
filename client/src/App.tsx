@@ -49,26 +49,14 @@ function App() {
           <>
             <h1 className="font-bold text-[3rem] text-center">Breaking Bad Wiki</h1>
             <div className='flex space-x-5'>
-              <p onClick={() => {
-                console.log("Clicked")
-                setSeries("All")
-                fetchData()
-              }}>All</p>
-              <p onClick={() => {
-                console.log("Clicked")
-                setSeries("Breaking Bad")
-                fetchData()
-              }}>Breaking Bad</p>
-              <p onClick={() => {
-                console.log("Clicked")
-                setSeries("Better Call Saul")
-                fetchData()
-              }}>Better Call Saul</p>
+              <p onClick={() => setSeries("All")}>All</p>
+              <p onClick={() => setSeries("Breaking Bad")}>Breaking Bad</p>
+              <p onClick={() => setSeries("Better Call Saul")}>Better Call Saul</p>
             </div>
             <div className='flex flex-col justify-center items-center lg:flex-row lg:flex-wrap'>
               {data.length > 0 ? (
                 data.map((character, index) => (
-                  <CharacterCard key={index} index={index} name={character.name} image_url={character.image_url} portrayed={character.portrayed} detailsUrl={`/characters/${index}/${encodeURIComponent(character.name.toLowerCase().replace(/\s+/g, '-'))}`} />
+                  <CharacterCard key={index} index={index} name={character.name} image_url={character.image_url} portrayed={character.portrayed} detailsUrl={`/characters/${character.series}/${character.name}`} />
                 ))
               ) : (
                 <p>No data</p>
@@ -76,7 +64,7 @@ function App() {
             </div>
           </>
         } />
-        <Route path="/characters/:index/:name" element={<CharacterDetails />} />
+        <Route path="/characters/:series/:name" element={<CharacterDetails />} />
       </Routes>
     </Router>
   );
