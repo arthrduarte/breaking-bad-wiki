@@ -53,7 +53,7 @@ function App() {
               <p onClick={() => setSeries("Breaking Bad")}>Breaking Bad</p>
               <p onClick={() => setSeries("Better Call Saul")}>Better Call Saul</p>
             </div>
-            <div className='flex flex-col justify-center items-center lg:flex-row lg:flex-wrap'>
+            <div className='flex flex-wrap justify-center items-center'>
               {data.length > 0 ? (
                 data.map((character, index) => (
                   <CharacterCard key={index} index={index} name={character.name} image_url={character.image_url} portrayed={character.portrayed} detailsUrl={`/characters/${character.series}/${character.name}`} />
