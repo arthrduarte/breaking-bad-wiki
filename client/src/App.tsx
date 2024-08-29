@@ -46,23 +46,30 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={
-          <>
-            <h1 className="font-bold text-[3rem] text-center">Breaking Bad Wiki</h1>
-            <div className='flex space-x-5'>
-              <p onClick={() => setSeries("All")}>All</p>
-              <p onClick={() => setSeries("Breaking Bad")}>Breaking Bad</p>
-              <p onClick={() => setSeries("Better Call Saul")}>Better Call Saul</p>
+          <div className="min-h-screen bg-gray-100 p-5">
+            <h1 className="font-bold text-4xl md:text-5xl text-gray-800 mb-10 text-center">Breaking Bad Wiki</h1>
+            <div className='flex justify-center mb-10 space-x-5'>
+              <p onClick={() => setSeries("All")} className="cursor-pointer text-lg text-blue-500 hover:text-blue-700">All</p>
+              <p onClick={() => setSeries("Breaking Bad")} className="cursor-pointer text-lg text-blue-500 hover:text-blue-700">Breaking Bad</p>
+              <p onClick={() => setSeries("Better Call Saul")} className="cursor-pointer text-lg text-blue-500 hover:text-blue-700">Better Call Saul</p>
             </div>
             <div className='flex flex-wrap justify-center items-center'>
               {data.length > 0 ? (
                 data.map((character, index) => (
-                  <CharacterCard key={index} index={index} name={character.name} image_url={character.image_url} portrayed={character.portrayed} detailsUrl={`/characters/${character.series}/${character.name}`} />
+                  <CharacterCard
+                    key={index}
+                    index={index}
+                    name={character.name}
+                    image_url={character.image_url}
+                    portrayed={character.portrayed}
+                    detailsUrl={`/characters/${character.series}/${character.name}`}
+                  />
                 ))
               ) : (
-                <p>No data</p>
+                  <p className="text-gray-700 text-lg">No data</p>
               )}
             </div>
-          </>
+          </div>
         } />
         <Route path="/characters/:series/:name" element={<CharacterDetails />} />
       </Routes>
