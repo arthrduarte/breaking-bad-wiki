@@ -25,11 +25,11 @@ function App() {
     try {
       if (series) {
         if (series == "All") {
-          const response = await axios.get('http://localhost:9000/characters');
+          const response = await axios.get('https://breaking-bad-wiki-wine.vercel.app//characters');
           setData(response.data);
         }
         if (series == "Better Call Saul" || series == "Breaking Bad") {
-          const response = await axios.get(`http://localhost:9000/characters/${series}`);
+          const response = await axios.get(`https://breaking-bad-wiki-wine.vercel.app//characters/${series}`);
           setData(response.data);
         }
       }

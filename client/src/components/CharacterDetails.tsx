@@ -23,7 +23,7 @@ export default function Character() {
 
     const fetchData = async () => {
         try {
-            const response = await axios.get(`http://localhost:9000/characters/${series}/${name}`);
+            const response = await axios.get(`https://breaking-bad-wiki-wine.vercel.app/${series}/${name}`);
             setData(response.data);
         } catch (error) {
             console.error("Error fetching data:", error);
