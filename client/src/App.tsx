@@ -1,9 +1,11 @@
 import CharacterDetails from './components/CharacterDetails';
 import CharacterCard from './components/CharacterCard';
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 import axios from 'axios';
+
+const apiURL = process.env.REACT_APP_API_URL
 
 interface Character {
   name: string;
@@ -24,12 +26,12 @@ function App() {
   const fetchData = async () => {
     try {
       if (series) {
-        if (series == "All") {
-          const response = await axios.get('http://localhost:9000/characters');
+        if (series === "All") {
+          const response = await axios.get(`${apiURL}/characters`);
           setData(response.data);
         }
-        if (series == "Better Call Saul" || series == "Breaking Bad") {
-          const response = await axios.get(`http://localhost:9000/characters/${series}`);
+        if (series === "Better Call Saul" || series === "Breaking Bad") {
+          const response = await axios.get(`${apiURL}/characters/${series}`);
           setData(response.data);
         }
       }
@@ -66,7 +68,7 @@ function App() {
                   />
                 ))
               ) : (
-                  <p className="text-gray-700 text-lg">No data</p>
+                <p className="text-gray-700 text-lg">No data</p>
               )}
             </div>
           </div>
