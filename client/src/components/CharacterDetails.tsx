@@ -5,6 +5,8 @@ import "../App.css"
 import path from 'path';
 import { Link } from 'react-router-dom';
 
+const apiURL = process.env.REACT_APP_API_URL
+
 interface Character {
     name: string;
     portrayed: string;
@@ -23,7 +25,7 @@ export default function Character() {
 
     const fetchData = async () => {
         try {
-            const response = await axios.get(`http://localhost:9000/characters/${series}/${name}`);
+            const response = await axios.get(`${apiURL}/characters/${series}/${name}`);
             setData(response.data);
         } catch (error) {
             console.error("Error fetching data:", error);
